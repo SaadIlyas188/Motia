@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "date": "September 2023",
+    "title": "The first memory",
+    "description": "The project began not with a question but with a scent — revisiting childhood memories of nano's garden, where motia grew in earthen pots by the courtyard wall. This early reflection became the seed of the entire inquiry.",
+    "category": "Research",
+    "image": null
+  },
+  {
+    "id": 2,
+    "date": "October 2023",
+    "title": "Visiting nano",
+    "description": "A visit to my grandmother's home in Pakistan. I watched her tend to the jasmine plants as she always had — watering them at dusk, picking the buds just before they opened. I recorded our conversations about the flower's meaning in her daily life.",
+    "category": "Fieldwork",
+    "image": "https://picsum.photos/seed/motia-nano-visit/600/400"
+  },
+  {
+    "id": 3,
+    "date": "November 2023",
+    "title": "Gathering jasmine",
+    "description": "I began collecting motia flowers from local South Asian gardens and florists. Each batch was pressed, dried, and catalogued. The act of gathering became a ritual in itself — a way of learning the flower through touch.",
+    "category": "Fieldwork",
+    "image": "https://picsum.photos/seed/motia-gathering/600/400"
+  },
+  {
+    "id": 4,
+    "date": "December 2023",
+    "title": "Reading and research",
+    "description": "Immersion in cultural studies scholarship — reading Sara Ahmed on affect, Trinh T. Minh-ha on sensory ethnography, and ethnobotanical texts on jasmine's role across South Asian ritual life. The theoretical framework began to take shape.",
+    "category": "Research",
+    "image": null
+  },
+  {
+    "id": 5,
+    "date": "January 2024",
+    "title": "Oral histories with my mother",
+    "description": "A series of recorded conversations with my mother about her relationship with motia — how she wore it in her hair as a young woman, how she associated it with her own mother, how the scent travelled with her when she left home.",
+    "category": "Fieldwork",
+    "image": "https://picsum.photos/seed/motia-mother/600/400"
+  },
+  {
+    "id": 6,
+    "date": "February 2024",
+    "title": "Making garlands",
+    "description": "Learning the technique of threading motia into garlands — the traditional gajra. My hands learned what my grandmother's hands already knew. The repetition became meditative, a form of embodied research.",
+    "category": "Making",
+    "image": "https://picsum.photos/seed/motia-garlands/600/400"
+  },
+  {
+    "id": 7,
+    "date": "March 2024",
+    "title": "Developing the textile concept",
+    "description": "The collection concept emerged: garments that carry the motia's qualities — its off-white softness, its brief lifespan, the gesture of tending and wearing. Initial sketches explored draping, layering, and hand-stitching as metaphors for care.",
+    "category": "Collection",
+    "image": "https://picsum.photos/seed/motia-textile-concept/600/400"
+  },
+  {
+    "id": 8,
+    "date": "April 2024",
+    "title": "Pattern making and toiles",
+    "description": "Translating the concept into pattern. Working with natural fabrics — cotton, silk organza, handwoven khadi — to find the right weight and fall. Each toile was a conversation between the idea and the material.",
+    "category": "Collection",
+    "image": "https://picsum.photos/seed/motia-patterns/600/400"
+  },
+  {
+    "id": 9,
+    "date": "May 2024",
+    "title": "The collection takes form",
+    "description": "Six pieces completed: each named after a quality of the motia flower. The garments sit between traditional South Asian silhouettes and contemporary minimalism — quiet, warm, and deliberately impermanent in feeling.",
+    "category": "Collection",
+    "image": "https://picsum.photos/seed/motia-collection-wip/600/400"
+  },
+  {
+    "id": 10,
+    "date": "June 2024",
+    "title": "Photoshoot preparation",
+    "description": "Scouting locations that echo the domestic warmth of nano's home — a sunlit courtyard, a linen-draped room, a garden at golden hour. Collaborating with a photographer who understood the project's quiet visual language.",
+    "category": "Making",
+    "image": "https://picsum.photos/seed/motia-shoot-prep/600/400"
+  },
+  {
+    "id": 11,
+    "date": "July 2024",
+    "title": "The photoshoot",
+    "description": "Two days of shooting. Fresh motia flowers were present on set — their scent filled the space. The model wore the garments as they were meant to be worn: gently, with the slow care of someone dressing for no one but herself.",
+    "category": "Making",
+    "image": "https://picsum.photos/seed/motia-photoshoot/600/400"
+  },
+  {
+    "id": 12,
+    "date": "August 2024",
+    "title": "Writing the abstract",
+    "description": "Distilling the research into its final written form. The abstract became a space where the personal and the scholarly met — a reflection on what it means to study something you have always carried.",
+    "category": "Writing",
+    "image": null
+  },
+  {
+    "id": 13,
+    "date": "September 2024",
+    "title": "Completing the artwork",
+    "description": "The final body of artwork — pressed flower compositions, textile samples, and photographic prints — was assembled. Together with the written thesis, it forms a complete practice-led inquiry into memory, scent, and inheritance.",
+    "category": "Making",
+    "image": "https://picsum.photos/seed/motia-artwork/600/400"
+  },
+  {
+    "id": 14,
+    "date": "October 2024",
+    "title": "Thesis submission",
+    "description": "The written thesis and practice portfolio were submitted. The project ends where it began — with a flower, a scent, and the quiet knowledge that some things are inherited without ever being spoken.",
+    "category": "Writing",
+    "image": null
+  }
+]

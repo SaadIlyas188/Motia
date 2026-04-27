@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Nano",
+    "role": "Grandmother",
+    "description": "My grandmother, who has tended motia plants for over fifty years. Her hands know the flower in ways no text can describe.",
+    "quote": "The motia doesn't ask you to love it. You just do. It is in the morning, in the evening, in every prayer. It is the house.",
+    "thumbnail": "https://picsum.photos/seed/motia-interview-nano/800/600",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+  },
+  {
+    "id": 2,
+    "name": "Ammi",
+    "role": "Mother",
+    "description": "My mother, who carried the scent of motia from her childhood home into ours. She speaks of the flower as something inseparable from the women who tend it.",
+    "quote": "When I smell motia, I am not here. I am in my mother's garden, and I am twelve years old, and the world is small and warm.",
+    "thumbnail": "https://picsum.photos/seed/motia-interview-ammi/800/600",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+  },
+  {
+    "id": 3,
+    "name": "Khalajan",
+    "role": "Great-aunt",
+    "description": "My grandmother's sister, who remembers the motia fields of their childhood village. Her stories reach further back than anyone else's.",
+    "quote": "We did not buy motia. It grew. Everywhere it grew. And every girl knew how to make a gajra before she knew how to read.",
+    "thumbnail": "https://picsum.photos/seed/motia-interview-khalajan/800/600",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+  }
+]

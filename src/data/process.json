@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "step": "01",
+    "title": "Gathering motia",
+    "description": "The process began with sourcing fresh Arabian jasmine from local gardens and South Asian florists. Each flower was handled with the same care my nano taught — picking them in the cool of early morning, before the sun could wilt the petals. The fragrance was overwhelming, filling the studio with a scent that made the work feel less like research and more like returning.",
+    "images": [
+      "https://picsum.photos/seed/motia-process-1a/800/800",
+      "https://picsum.photos/seed/motia-process-1b/800/800"
+    ]
+  },
+  {
+    "id": 2,
+    "step": "02",
+    "title": "Pressing and preserving",
+    "description": "Motia is ephemeral — it browns within hours of being picked. To preserve it, I developed a pressing technique using blotting paper and weighted frames, drying the flowers slowly over two weeks. Some were preserved in resin; others were left to age naturally, their browning becoming part of the material narrative.",
+    "images": [
+      "https://picsum.photos/seed/motia-process-2a/800/800"
+    ]
+  },
+  {
+    "id": 3,
+    "step": "03",
+    "title": "Developing the textile concept",
+    "description": "The collection grew from a simple observation: the motia flower is worn, not displayed. It sits in hair, on wrists, around necks. The textiles needed to carry the same intimacy — garments that touch the skin the way a garland does. I explored natural fabrics in the flower's colour range: raw silk, unbleached cotton, handwoven khadi.",
+    "images": [
+      "https://picsum.photos/seed/motia-process-3a/800/800",
+      "https://picsum.photos/seed/motia-process-3b/800/800"
+    ]
+  },
+  {
+    "id": 4,
+    "step": "04",
+    "title": "Pattern making",
+    "description": "Patterns were drafted by hand on brown paper — the same kind nano uses to line her shelves. Each garment began as a flat shape inspired by South Asian silhouettes: the kameez, the dupatta, the shalwar. These were then deconstructed and reassembled into contemporary forms that retained the original gesture.",
+    "images": [
+      "https://picsum.photos/seed/motia-process-4a/800/800"
+    ]
+  },
+  {
+    "id": 5,
+    "step": "05",
+    "title": "Garland threading",
+    "description": "Learning to thread motia garlands — gajra — was a form of embodied research. My grandmother's hands moved through the flowers with an ease that took me weeks to approach. The repetitive act of threading became meditative: a stitch-by-stitch conversation between my body and hers across time.",
+    "images": [
+      "https://picsum.photos/seed/motia-process-5a/800/800",
+      "https://picsum.photos/seed/motia-process-5b/800/800"
+    ]
+  },
+  {
+    "id": 6,
+    "step": "06",
+    "title": "Final photoshoot preparation",
+    "description": "The photoshoot required fresh motia — dozens of garlands sourced the morning of the shoot. The set was dressed to echo the domestic warmth of a South Asian home: linen drapes, copper vessels, warm light. The model was briefed to move slowly, gently — as though she were alone in her grandmother's house.",
+    "images": [
+      "https://picsum.photos/seed/motia-process-6a/800/800"
+    ]
+  }
+]

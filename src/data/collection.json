@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Gulab",
+    "description": "A draped wrap dress in raw silk organza, inspired by the way motia petals fold inward at dusk. The silhouette references the dupatta — worn loose, unhurried, and close to the skin.",
+    "materials": "Silk organza, hand-finished edges",
+    "image": "https://picsum.photos/seed/motia-collection-1/600/800"
+  },
+  {
+    "id": 2,
+    "name": "Mehak",
+    "description": "A layered tunic in handwoven khadi with pressed motia flowers embedded into the weave. The garment carries the flower literally — its texture visible in the cloth.",
+    "materials": "Handwoven khadi, pressed flowers, cotton lining",
+    "image": "https://picsum.photos/seed/motia-collection-2/600/800"
+  },
+  {
+    "id": 3,
+    "name": "Chameli",
+    "description": "A wide-leg trouser in washed cotton with a drawstring waist. The fabric has been tea-stained to achieve the exact off-white of a motia bud before it opens.",
+    "materials": "Organic cotton, natural tea dye",
+    "image": "https://picsum.photos/seed/motia-collection-3/600/800"
+  },
+  {
+    "id": 4,
+    "name": "Rani",
+    "description": "A structured jacket with hand-embroidered motia motifs along the collar and cuffs. The embroidery follows the pattern of a traditional gajra — flowers threaded in a continuous line.",
+    "materials": "Cotton canvas, silk thread embroidery",
+    "image": "https://picsum.photos/seed/motia-collection-4/600/800"
+  },
+  {
+    "id": 5,
+    "name": "Nanima",
+    "description": "A floor-length slip dress in cream silk charmeuse, named for the grandmother. The simplest piece in the collection — it carries nothing except the warmth of its colour and the weight of its name.",
+    "materials": "Silk charmeuse, invisible hem",
+    "image": "https://picsum.photos/seed/motia-collection-5/600/800"
+  },
+  {
+    "id": 6,
+    "name": "Gajra",
+    "description": "A hand-knitted shawl with a border of crocheted motia flowers. Intended to be worn as nano wears her chadar — draped over the shoulders during evening prayer.",
+    "materials": "Merino wool, crochet cotton flowers",
+    "image": "https://picsum.photos/seed/motia-collection-6/600/800"
+  },
+  {
+    "id": 7,
+    "name": "Khushbu",
+    "description": "An open-front vest in naturally dyed linen, with interior pockets designed to hold dried motia sachets. The scent becomes part of the garment's life.",
+    "materials": "Linen, natural indigo and turmeric dye",
+    "image": "https://picsum.photos/seed/motia-collection-7/600/800"
+  },
+  {
+    "id": 8,
+    "name": "Bela",
+    "description": "A cropped blouse with pintuck detailing that mirrors the veins of a jasmine leaf. Designed to be worn with Chameli — together they form a quiet, complete look.",
+    "materials": "Cotton voile, pintuck detailing",
+    "image": "https://picsum.photos/seed/motia-collection-8/600/800"
+  }
+]
