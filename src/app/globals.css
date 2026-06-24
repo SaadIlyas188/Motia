@@ -12,6 +12,15 @@ body {
   color: #2B2520;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* reserve space for mobile bottom nav */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Push page content above mobile bottom nav */
+@media (max-width: 1023px) {
+  main {
+    padding-bottom: 80px;
+  }
 }
 
 ::selection {

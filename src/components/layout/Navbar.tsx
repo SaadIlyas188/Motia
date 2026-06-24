@@ -3,22 +3,16 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const navLinks = [
-  { href: '/project', label: 'Project' },
-  { href: '/collection', label: 'Collection' },
   { href: '/photoshoot', label: 'Photoshoot' },
-  { href: '/process', label: 'Process' },
-  { href: '/timeline', label: 'Timeline' },
-  { href: '/interviews', label: 'Interviews' },
+  { href: '/thesis', label: 'Thesis' },
   { href: '/about', label: 'About' },
 ];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -27,38 +21,24 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
-  }, [menuOpen]);
-
   return (
     <>
+      {/* ── DESKTOP TOP NAV (lg and above, unchanged) ── */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ease-in-out ${
+        className={`hidden lg:flex fixed top-8 left-0 right-0 z-50 transition-all duration-200 ease-in-out ${
           scrolled
             ? 'bg-motia-cream border-b border-motia-divider'
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-[1280px] mx-auto px-6 md:px-10 flex items-center justify-between h-16">
+        <div className="max-w-[1280px] mx-auto px-10 flex items-center justify-between h-16 w-full">
           <Link
             href="/"
             className="font-display italic text-[22px] text-motia-text leading-none"
           >
             motia
           </Link>
-
-          {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -73,52 +53,57 @@ export function Navbar() {
               </Link>
             ))}
           </div>
-
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden text-motia-text p-1"
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
         </div>
       </nav>
 
-      {/* Mobile menu overlay */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="fixed inset-0 z-40 bg-motia-cream flex flex-col items-start justify-center px-10"
+      {/* ── MOBILE TOP BAR — logo only ── */}
+      <div
+        className={`lg:hidden fixed top-8 left-0 right-0 z-50 transition-all duration-200 ${
+          scrolled ? 'bg-motia-cream/95 backdrop-blur-sm border-b border-motia-divider' : 'bg-transparent'
+        }`}
+      >
+        <div className="flex items-center justify-center h-12">
+          <Link
+            href="/"
+            className="font-display italic text-[20px] text-motia-text leading-none"
           >
-            <nav className="flex flex-col gap-6">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05, duration: 0.4, ease: 'easeOut' }}
-                >
-                  <Link
-                    href={link.href}
-                    className={`font-display italic text-[36px] leading-tight transition-colors duration-300 ${
-                      pathname === link.href
-                        ? 'text-motia-text'
-                        : 'text-motia-muted hover:text-motia-text'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            motia
+          </Link>
+        </div>
+      </div>
+
+      {/* ── MOBILE BOTTOM TAB BAR ── */}
+      <motion.nav
+        initial={{ y: 80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-motia-cream/95 backdrop-blur-sm border-t border-motia-divider"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+      >
+        <div className="flex items-stretch">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`flex-1 flex flex-col items-center justify-center py-3 gap-0.5 transition-colors duration-200 ${
+                pathname === link.href
+                  ? 'text-motia-text'
+                  : 'text-motia-muted'
+              }`}
+            >
+              <span
+                className={`w-1 h-1 rounded-full mb-0.5 transition-all duration-200 ${
+                  pathname === link.href ? 'bg-motia-accent opacity-100' : 'opacity-0'
+                }`}
+              />
+              <span className="font-body text-[11px] uppercase tracking-[0.08em]">
+                {link.label}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </motion.nav>
     </>
   );
 }
+

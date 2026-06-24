@@ -23,6 +23,18 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body bg-motia-cream text-motia-text">
+        {/* ── TOP BANNER ── */}
+        <div className="fixed top-0 left-0 right-0 z-[60] h-8 bg-motia-dark flex items-center justify-center px-4">
+          <p className="font-body text-[10px] md:text-[11px] tracking-[0.12em] uppercase text-motia-muted text-center">
+            Shiza Khan
+            <span className="mx-2 text-motia-muted/40">·</span>
+            Bachelor of Design — Fashion Designing
+            <span className="hidden sm:inline">
+              <span className="mx-2 text-motia-muted/40">·</span>
+              Beaconhouse National University
+            </span>
+          </p>
+        </div>
         <Navbar />
         <main>{children}</main>
         <Footer />
