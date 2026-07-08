@@ -1,18 +1,205 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PullQuote } from '@/components/ui/PullQuote';
 
+function LazyImage({ src, alt, fill = true, className = '', sizes, style, priority = false, onClick }: {
+  src: string; alt: string; fill?: boolean; className?: string;
+  sizes?: string; style?: React.CSSProperties; priority?: boolean;
+  onClick?: () => void;
+}) {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className={`relative w-full h-full ${onClick ? 'cursor-pointer' : ''}`} onClick={onClick}>
+      {!loaded && <div className="absolute inset-0 skeleton-shimmer" />}
+      <Image
+        src={src}
+        alt={alt}
+        fill={fill}
+        className={`${className} transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        sizes={sizes}
+        style={style}
+        priority={priority}
+        loading={priority ? undefined : 'lazy'}
+        onLoad={() => setLoaded(true)}
+        placeholder="empty"
+      />
+    </div>
+  );
+}
+
+const ALL_IMAGES = [
+  '/images/thesis/Figure1.jpeg',
+  '/images/thesis/Figure3.jpeg',
+  '/images/thesis/Figure41.jpeg',
+  '/images/thesis/Figure42.jpeg',
+  '/images/thesis/Figure43.jpeg',
+  '/images/thesis/Figure44.jpeg',
+  '/images/thesis/Figure51.jpeg',
+  '/images/thesis/Figure52.jpeg',
+  '/images/thesis/Figure53.jpeg',
+  '/images/thesis/Figure54.jpeg',
+  '/images/thesis/Figure2.jpeg',
+  '/images/thesis/Figure71.jpeg',
+  '/images/thesis/Figure72.jpeg',
+  '/images/thesis/Figure73.jpeg',
+  '/images/thesis/Figure74.jpeg',
+  '/images/thesis/Figure75.jpeg',
+  '/images/thesis/Figure76.jpeg',
+  '/images/thesis/Figure77.jpeg',
+  '/images/thesis/Figure78.jpeg',
+  '/images/thesis/Figure6.jpeg',
+  '/images/thesis/Figure8.jpeg',
+];
+
+function Lightbox({ images, currentIndex, onClose, onNavigate }: {
+  images: string[]; currentIndex: number;
+  onClose: () => void; onNavigate: (idx: number) => void;
+}) {
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft') onNavigate((currentIndex - 1 + images.length) % images.length);
+      if (e.key === 'ArrowRight') onNavigate((currentIndex + 1) % images.length);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [currentIndex, images.length, onClose, onNavigate]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-[100] bg-motia-dark/95 flex items-center justify-center"
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white transition-colors z-10"
+      >
+        <X size={28} />
+      </button>
+
+      <button
+        onClick={(e) => { e.stopPropagation(); onNavigate((currentIndex - 1 + images.length) % images.length); }}
+        className="absolute left-3 md:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-10"
+      >
+        <ChevronLeft size={36} />
+      </button>
+
+      <button
+        onClick={(e) => { e.stopPropagation(); onNavigate((currentIndex + 1) % images.length); }}
+        className="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-10"
+      >
+        <ChevronRight size={36} />
+      </button>
+
+      <motion.div
+        key={currentIndex}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.3 }}
+        className="relative w-[90vw] h-[80vh] md:w-[80vw] md:h-[85vh]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <LazyImage
+          src={images[currentIndex]}
+          alt={`Full view ${currentIndex + 1}`}
+          className="object-contain"
+          sizes="90vw"
+        />
+      </motion.div>
+
+      <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 text-white/60 font-body text-[11px] md:text-[13px] tracking-[0.1em]">
+        {currentIndex + 1} / {images.length}
+      </div>
+    </motion.div>
+  );
+}
+
+function AutoSlideshow({ images, alt, aspect = 'aspect-[4/3]', interval = 3000, onImageClick }: {
+  images: string[]; alt: string; aspect?: string; interval?: number;
+  onImageClick: (src: string) => void;
+}) {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent(prev => (prev + 1) % images.length);
+    }, interval);
+    return () => clearInterval(timer);
+  }, [images.length, interval]);
+
+  return (
+    <div className={`relative overflow-hidden cursor-pointer ${aspect}`} onClick={() => onImageClick(images[current])}>
+      <div className="absolute inset-0 skeleton-shimmer" />
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: 'easeInOut' }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={images[current]}
+            alt={`${alt} ${current + 1}`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </motion.div>
+      </AnimatePresence>
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+        {images.map((_, i) => (
+          <div
+            key={i}
+            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+              i === current ? 'bg-motia-text/70 w-4' : 'bg-motia-text/25'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function ThesisPage() {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const openLightbox = (src: string) => {
+    const idx = ALL_IMAGES.indexOf(src);
+    setLightboxIndex(idx >= 0 ? idx : 0);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    setLightboxIndex(null);
+    document.body.style.overflow = '';
+  };
+
   return (
     <>
       {/* ══ SECTION 1 — HERO ══ */}
-      <section className="relative min-h-[92vh] md:min-h-screen flex flex-col justify-end px-5 md:px-10 pb-14 md:pb-28 bg-motia-dark overflow-hidden pt-12 md:pt-0">
-        <div className="absolute inset-0 bg-motia-dark">
-          <div className="absolute inset-0 bg-gradient-to-t from-motia-dark via-motia-dark/80 to-motia-dark/40" />
-          <div className="absolute inset-0 flex items-center justify-center opacity-10">
-            <p className="font-body text-[11px] text-motia-cream italic text-center px-6">[Full-bleed: Real motia specimens on table]</p>
-          </div>
+      <section className="relative min-h-[92vh] md:min-h-screen flex flex-col justify-end px-5 md:px-10 pb-14 md:pb-28 overflow-hidden pt-12 md:pt-0">
+        <div className="absolute inset-0">
+          <LazyImage
+            src="/images/thesis/Figure8.jpeg"
+            alt="Motia Collection"
+            className="object-cover object-[center_70%]"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-motia-dark via-motia-dark/60 to-motia-dark/20" />
         </div>
 
         <div className="relative z-10 max-w-[1280px] mx-auto w-full">
@@ -89,8 +276,14 @@ export default function ThesisPage() {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.7 }}
             >
-              <div className="bg-motia-sand aspect-[4/3] md:aspect-[4/5] flex items-center justify-center">
-                <p className="font-body text-[11px] text-motia-muted italic text-center px-4">[Real motia specimens on table]</p>
+              <div className="relative aspect-[4/3] md:aspect-[4/5] overflow-hidden">
+                <LazyImage
+                  src="/images/thesis/Figure1.jpeg"
+                  alt="Real motia specimens on table"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  onClick={() => openLightbox('/images/thesis/Figure1.jpeg')}
+                />
               </div>
             </motion.div>
 
@@ -218,8 +411,14 @@ export default function ThesisPage() {
 
       {/* ══ SECTION 6 — RESEARCHER IMAGE ══ */}
       <section className="relative">
-        <div className="aspect-[4/3] md:aspect-[16/7] bg-motia-linen flex items-center justify-center">
-          <p className="font-body text-[11px] text-motia-muted italic text-center px-6">[Researcher looking at garments on crookie, casually sitting on table]</p>
+        <div className="relative aspect-[4/3] md:aspect-[16/7] overflow-hidden">
+          <LazyImage
+            src="/images/thesis/Figure3.jpeg"
+            alt="Researcher looking at garments on crookie"
+            className="object-cover"
+            sizes="100vw"
+            onClick={() => openLightbox('/images/thesis/Figure3.jpeg')}
+          />
         </div>
         <motion.div
           initial={{ opacity: 0 }}
@@ -271,9 +470,18 @@ export default function ThesisPage() {
             viewport={{ once: true, margin: '-30px' }}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-motia-linen aspect-[4/3] flex items-center justify-center">
-              <p className="font-body text-[11px] text-motia-muted italic text-center px-4">[Basic sketches of garments]</p>
-            </div>
+            <AutoSlideshow
+              images={[
+                '/images/thesis/Figure41.jpeg',
+                '/images/thesis/Figure42.jpeg',
+                '/images/thesis/Figure43.jpeg',
+                '/images/thesis/Figure44.jpeg',
+              ]}
+              alt="Basic sketches of garments"
+              aspect="aspect-[4/3]"
+              interval={3500}
+              onImageClick={openLightbox}
+            />
             <p className="mt-2 font-body text-[11px] text-motia-muted italic">
               Initial sketches — softness, resilience, and layered structure.
             </p>
@@ -289,9 +497,18 @@ export default function ThesisPage() {
             transition={{ duration: 0.6 }}
             className="order-2 md:order-1"
           >
-            <div className="bg-motia-linen aspect-[3/4] flex items-center justify-center">
-              <p className="font-body text-[11px] text-motia-muted italic text-center px-4">[Fashion illustrations of 4 garments]</p>
-            </div>
+            <AutoSlideshow
+              images={[
+                '/images/thesis/Figure51.jpeg',
+                '/images/thesis/Figure52.jpeg',
+                '/images/thesis/Figure53.jpeg',
+                '/images/thesis/Figure54.jpeg',
+              ]}
+              alt="Fashion illustrations of garments"
+              aspect="aspect-[3/4]"
+              interval={3500}
+              onImageClick={openLightbox}
+            />
             <p className="mt-2 font-body text-[11px] text-motia-muted italic">
               Blooming narrative — protective enclosure to emotional openness.
             </p>
@@ -334,8 +551,14 @@ export default function ThesisPage() {
             viewport={{ once: true, margin: '-30px' }}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-motia-linen aspect-[4/3] flex items-center justify-center">
-              <p className="font-body text-[11px] text-motia-muted italic text-center px-4">[Different motias from different fabrics on table]</p>
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <LazyImage
+                src="/images/thesis/Figure2.jpeg"
+                alt="Different motias from different fabrics on table"
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                onClick={() => openLightbox('/images/thesis/Figure2.jpeg')}
+              />
             </div>
             <p className="mt-2 font-body text-[11px] text-motia-muted italic">
               Motia forms from collection fabrics — translating the flower into wearable material.
@@ -369,7 +592,7 @@ export default function ThesisPage() {
           </p>
         </motion.div>
 
-        {/* Process grid — 2 cols mobile, 4 cols desktop */}
+        {/* Process grid */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -377,9 +600,15 @@ export default function ThesisPage() {
           transition={{ duration: 0.7 }}
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="bg-motia-linen aspect-[3/4] flex items-center justify-center">
-                <p className="font-body text-[10px] text-motia-muted italic text-center px-2">[Process {i + 1}]</p>
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+              <div key={num} className="relative aspect-[3/4] overflow-hidden">
+                <LazyImage
+                  src={`/images/thesis/Figure7${num}.jpeg`}
+                  alt={`Draping and construction process ${num}`}
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  onClick={() => openLightbox(`/images/thesis/Figure7${num}.jpeg`)}
+                />
               </div>
             ))}
           </div>
@@ -418,8 +647,14 @@ export default function ThesisPage() {
               viewport={{ once: true, margin: '-30px' }}
               transition={{ duration: 0.7 }}
             >
-              <div className="bg-motia-sand aspect-[4/3] md:aspect-[5/4] flex items-center justify-center">
-                <p className="font-body text-[11px] text-motia-muted italic text-center px-4">[Different motias made from garment fabrics]</p>
+              <div className="relative aspect-[4/3] md:aspect-[5/4] overflow-hidden">
+                <LazyImage
+                  src="/images/thesis/Figure6.jpeg"
+                  alt="Different motias from different fabrics on table"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 60vw"
+                  onClick={() => openLightbox('/images/thesis/Figure6.jpeg')}
+                />
               </div>
             </motion.div>
             <motion.div
@@ -467,8 +702,15 @@ export default function ThesisPage() {
           transition={{ duration: 0.8 }}
           className="px-5 md:px-10"
         >
-          <div className="bg-motia-linen aspect-[4/3] md:aspect-[21/9] max-w-[1280px] mx-auto flex items-center justify-center">
-            <p className="font-body text-[11px] text-motia-muted italic text-center px-4">[Final 4 garments on crookie — narrative sequence from enclosed to expansive]</p>
+          <div className="relative aspect-[4/3] md:aspect-[21/9] max-w-[1280px] mx-auto overflow-hidden">
+            <LazyImage
+              src="/images/thesis/Figure8.jpeg"
+              alt="Final 4 garments on crookie — narrative sequence from enclosed to expansive"
+              className="object-cover"
+              style={{ objectPosition: 'center 65%' }}
+              sizes="100vw"
+              onClick={() => openLightbox('/images/thesis/Figure8.jpeg')}
+            />
           </div>
           <p className="mt-3 font-body text-[11px] text-motia-muted italic text-center max-w-[320px] md:max-w-[600px] mx-auto">
             The completed collection, Looks 1–4. From protective enclosure (left) to emotional openness (right).
@@ -620,6 +862,18 @@ export default function ThesisPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <Lightbox
+            images={ALL_IMAGES}
+            currentIndex={lightboxIndex}
+            onClose={closeLightbox}
+            onNavigate={(idx) => setLightboxIndex(idx)}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }
